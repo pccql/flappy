@@ -27,9 +27,9 @@ def tela_inicial():
         screen.blit(chao, (0, altura - chao.get_height()))
 
         font = pygame.font.Font(None, 80)
-        tituloText = font.render('Flappy Bird', True, (0, 0, 0))
-        rectTituloText = tituloText.get_rect(center=(200, 250))
-        screen.blit(tituloText, rectTituloText)
+        titulo_text = font.render('Flappy Bird', True, (0, 0, 0))
+        rect_titulo_texto = titulo_text.get_rect(center=(200, 250))
+        screen.blit(titulo_text, rect_titulo_texto)
 
         if button(70, 'Jogar', (200, 400), 'black', 'white', screen, 'white', (255, 100, 0)):
             inicio = False
@@ -46,23 +46,20 @@ def play():
     gravidade = 1
     velocity = 10
     tela_game_over = False
-    imagens = ['./images/flappy_up.png'
-        , './images/flappy_mid.png',
+    imagens = ['./images/flappy_up.png', './images/flappy_mid.png',
                './images/flappy_down.png']
 
     class Jogador(pygame.sprite.Sprite):
         def __init__(self):
             super(Jogador, self).__init__()
             self.atual = 0
-            self.image = imagens[self.atual]
-            self.surf = pygame.image.load(self.image)
+            self.surf = pygame.image.load(imagens[self.atual])
             self.rect = self.surf.get_rect(center=(200, 100))
             self.velocity = velocity
 
         def update(self):
             self.atual = (self.atual + 1) % 3
-            self.image = imagens[self.atual]
-            self.surf = pygame.image.load(self.image)
+            self.surf = pygame.image.load(imagens[self.atual])
             self.velocity += gravidade
             self.rect[1] += self.velocity
 
@@ -82,7 +79,6 @@ def play():
             self.surf_Baixo = pygame.transform.scale(self.surf_Baixo, (40, alturaCanoBaixo))
             self.rectBaixo = self.surf_Baixo.get_rect(center=(450, self.posY + (self.surf_Baixo.get_height() // 2)))
             self.rectCima = self.surf_Cima.get_rect(center=(450, self.surf_Cima.get_height() // 2))
-            self.rect = 0
 
         def update(self):
             self.rectBaixo[0] -= 5
@@ -201,7 +197,6 @@ def play():
                 tela_game_over = False
 
             pygame.display.flip()
-
 
 tela_inicial()
 play()
