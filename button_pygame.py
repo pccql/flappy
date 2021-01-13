@@ -52,19 +52,20 @@ def button(size_text, message, center_message, colour_message, colour_button, su
 
 
     font = pygame.font.Font(font, size_text)
-    text = font.render(message, True, colour_message)
+    text = font.render(message, True, lista[0]) # lista[0] == colour_message
+    
     xButaoInicio = center_message[0] - (text.get_width() // 2) - 20
     yButaoInicio = center_message[1] - (text.get_height() // 2) - 20
     xButaoFinal = text.get_width() + 40
     yButaoFinal = text.get_height() + 40
-    pygame.draw.rect(surface, colour_button, (xButaoInicio, yButaoInicio, xButaoFinal, yButaoFinal))
+    pygame.draw.rect(surface, lista[2], (xButaoInicio, yButaoInicio, xButaoFinal, yButaoFinal))
     surface.blit(text, text.get_rect(center=center_message))
     mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
 
     if xButaoInicio < mouse[0] < xButaoInicio + xButaoFinal and yButaoInicio < mouse[1] < yButaoFinal + yButaoInicio:
-        pygame.draw.rect(surface, new_colour_button, (xButaoInicio, yButaoInicio, xButaoFinal, yButaoFinal))
-        text = font.render(message, True, new_colour_msg)
+        pygame.draw.rect(surface, lista[3], (xButaoInicio, yButaoInicio, xButaoFinal, yButaoFinal))
+        text = font.render(message, True, lista[1])
         surface.blit(text, text.get_rect(center=center_message))
         if click[0] == 1:
             return True
